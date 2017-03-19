@@ -53,7 +53,6 @@ int main(void) {
         char currentTime[7] = {0, 0, 0, 0, 0, 0, '\0'}; //%H%M%S
         char alarmTime[5] = {0, 0, 0, 0, '\0'}; //%H%M
         ifstream alarmSoundFile;
-        //FILE *file = nullptr;
 
         char buffer; //key input
         do {
@@ -81,38 +80,9 @@ int main(void) {
             cout << "\n\n" << data[6] << '\n' << data[11] << endl;
 
             buffer = (char) getch();
-            /*
-            if (buffer == 27) { //27 is Esc
-                //free(data);
-                delete[]data;
-                //for(i=0;i<datasize;i++)delete[]firstdata[i];
-                return 0;
-            }
-            else if (buffer >= '0' && buffer <= '9' && position < 4) {
-                if ((position == 0 && buffer <= '2') ||
-                    (position == 1 && (alarmTime[0] <= '1' || (alarmTime[0] == '2' && buffer <= '3'))) ||
-                    (position == 2 && buffer <= '5') ||
-                    (position > 2)) {
-                    alarmTime[position] = buffer;
-                    position++;
-                }
-            }
-            else if (buffer == 8 && position > 0)position--;
-            else if (buffer == 13 && position == 4) { //13 is Enter
-                if ((file = fopen(data[2], "r")) == nullptr) { //try to open alarm.mp3 and what to do if can't
-                    fclose(file);
-                    cout << '\n' << data[7] << endl; //"Error: can't find file 'alarm.mp3'!"
-                    Sleep(1000);
-                } else position = -1; //if file is successfully opened, break from cycle
-            }
-            else if(buffer == 76 || buffer == 108 || buffer == 132 || buffer == 164) { //L l Д д
-                system("start Alarmclock.log");
-            }
-            */
             switch(buffer) {
                 case 27: //Esc
                     delete[]data;
-                    //for(i=0;i<datasize;i++)delete[]firstdata[i];
                     return 0;
                 case '0':
                 case '1':
@@ -145,13 +115,6 @@ int main(void) {
                             cout << '\n' << data[7] << endl; //"Error: can't find file 'alarm.mp3'!"
                             Sleep(1000);
                         } else position = -1; //if file is successfully opened, escape from cycle
-                        /*
-                        if ((file = fopen(data[2], "r")) == nullptr) { //try to open alarm.mp3 and what to do if can't
-                            fclose(file);
-                            cout << '\n' << data[7] << endl; //"Error: can't find file 'alarm.mp3'!"
-                            Sleep(1000);
-                        } else position = -1; //if file is successfully opened, escape from cycle
-                         */
                     }
                     break;
                 case 'L':
@@ -168,7 +131,6 @@ int main(void) {
 
         position = 0;
         timeT = time(&timeT);
-        //ctime(&timeT);
         strftime(currentTime, 7, "%H%M%S", localtime(&timeT));
 
         log("Alarm set at ", alarmTime);
@@ -180,7 +142,6 @@ int main(void) {
                         position = -1;
                         continue; //shifting to verification of cycle conditions
                     case 27: { //27 is Esc
-                        //free(data);
                         delete[]data;
                         return 0;
                     }
@@ -204,7 +165,6 @@ int main(void) {
                 currentTime[2] == alarmTime[2] && currentTime[3] == alarmTime[3]) {
                 cout << data[12] << endl; //"Activation..."
 
-                //fclose(file);
                 alarmSoundFile.close();
                 if(handlerToWindow != GetForegroundWindow())FlashWindow(handlerToWindow,true); //Window flashes
 
@@ -256,7 +216,6 @@ char **setLanguage(boolean showInterface) {
         nativeData[11] = "Выйти из программы \tEsc";
         nativeData[12] = "Активация...";
         for (i = 3; i < dataSize; i++)CharToOem(nativeData[i], data[i]);
-        //free(nativeData);
         for(i=0;i<dataSize;i++)delete[]nativeData[i];
     }
     data[0] = "title Alarmclock 5.2 by Nikdoge&color f0";
@@ -314,29 +273,23 @@ HWND GetConsoleHwnd(void)
     // WindowTitle.
 
     // Fetch current window title.
-
     GetConsoleTitle(pszOldWindowTitle, (DWORD)MY_BUFSIZE);
 
     // Format a "unique" NewWindowTitle.
-
     wsprintf(pszNewWindowTitle,"%d/%d",
              GetTickCount(),
              GetCurrentProcessId());
 
     // Change current window title.
-
     SetConsoleTitle(pszNewWindowTitle);
 
     // Ensure window title has been updated.
-
     Sleep(40);
 
     // Look for NewWindowTitle.
-
     hwndFound = FindWindow(NULL, pszNewWindowTitle);
 
     // Restore original window title.
-
     SetConsoleTitle(pszOldWindowTitle);
 
     return(hwndFound);
