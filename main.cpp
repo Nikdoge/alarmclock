@@ -36,8 +36,8 @@ int main(void) {
     cout << "Getting handler to current window to enable flashing";
     HWND handlerToWindow = GetConsoleHwnd();
     cout << " [OK]" << endl;
-    //setlocale(LC_ALL, "Russian");
     cout << "Initializing language data";
+    setlocale(LC_ALL, "Russian");
     char **data = setLanguage(0);
     cout << " [OK]" << endl;
     cout << "Setting console name and background";
@@ -201,22 +201,16 @@ char **setLanguage(boolean showInterface) {
         data[12] = "Activation...";
     } else {
         //Russian
-        char **nativeData = new char *[dataSize];
-        for (i = 3; i < dataSize; i++)
-            nativeData[i - 3] = new char[80];
-
-        nativeData[3] = "В заданное время Alarmclock запускает воспроизведение";
-        nativeData[4] = "файла 'alarm.mp3' из папки, где расположен Alarmclock.exe";
-        nativeData[5] = "Введите время будильника:";
-        nativeData[6] = "После ввода нажмите \tEnter";
-        nativeData[7] = "Ошибка: Невозможно найти файл 'alarm.mp3'!";
-        nativeData[8] = "Системное время: ";
-        nativeData[9] = "Будильник: ";
-        nativeData[10] = "Задать новые данные \tПробел";
-        nativeData[11] = "Выйти из программы \tEsc";
-        nativeData[12] = "Активация...";
-        for (i = 3; i < dataSize; i++)CharToOem(nativeData[i], data[i]);
-        for(i=0;i<dataSize;i++)delete[]nativeData[i];
+        data[3] = "В заданное время Alarmclock запускает воспроизведение";
+        data[4] = "файла 'alarm.mp3' из папки, где расположен Alarmclock.exe";
+        data[5] = "Введите время будильника:";
+        data[6] = "После ввода нажмите \tEnter";
+        data[7] = "Ошибка: Невозможно найти файл 'alarm.mp3'!";
+        data[8] = "Системное время: ";
+        data[9] = "Будильник: ";
+        data[10] = "Задать новые данные \tПробел";
+        data[11] = "Выйти из программы \tEsc";
+        data[12] = "Активация...";
     }
     data[0] = "title Alarmclock 5.2 by Nikdoge&color f0";
     data[1] = "cls";
